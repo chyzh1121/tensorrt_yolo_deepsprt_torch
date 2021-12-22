@@ -1,0 +1,25 @@
+cd tensor_demos/ssd
+./install_pycuda.sh
+sudo pip3 install onnx==1.4.1
+
+每次更换设备需要注意这一段 要利用weight和cfg重新生成onnx
+cd tensorrt_yolo_deepsort_torch 
+cd plugins
+make
+cd yolo
+python3 yolo_to_onnx.py -m yolov4-tiny-416 (需要高版本protobuf)
+python3 onnx_to_tensorrt.py -m yolov4-tiny-416
+
+
+pytorch:
+https://blog.csdn.net/weixin_42622181/article/details/107671079
+
+torchvision:
+sudo apt-get install libjpeg-dev zlib1g-dev
+git clone --branch v0.5.0 https://github.com/pytorch/vision torchvision
+cd torchvision
+sudo python3 setup.py install
+如果失敗 去下載源碼
+
+sudo apt-get -y install python3-scipy
+sudo pip3 install easydict
